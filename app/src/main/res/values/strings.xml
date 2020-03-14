@@ -1,0 +1,8 @@
+<resources>
+	<string name="app_name">KosMembers</string>
+	<string name="nameEdit">Имя и фамилия (необязательно)</string>
+	<string name="bookEdit">Название документа</string>
+	<string name="sendBtn">Отправить предложение</string>
+	<string name="commentEdit">Комментарий</string>
+	<string name="suggestBookLabel">Предложите документ, который вы хотите видеть в программе</string>
+</resources>

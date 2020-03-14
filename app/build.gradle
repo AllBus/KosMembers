@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.protobuf'
+apply plugin: "jp.leafytree.android-scala"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.kos.kosmembers"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.10.0'
+    }
+    plugins {
+        scalapb {
+            artifact = (org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem().isWindows()) ?
+                    "com.thesamet.scalapb:protoc-gen-scala:${scalapbVersion}:windows@bat" :
+                    "com.thesamet.scalapb:protoc-gen-scala:${scalapbVersion}:unix@sh"
+        }
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                // if you don't want java code to be generated.
+                //remove java
+            }
+            task.plugins {
+                scalapb {
+                    option 'grpc'
+                    // add any ScalaPB generator options here. See: https://scalapb.github.io/scalapbc.html#passing-generator-parameters
+                    // option 'flat_package'
+                }
+            }
+        }
+    }
+}
+
+configurations {
+    all {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "org.scala-lang:scala-library:2.11.12"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "com.thesamet.scalapb:scalapb-runtime_2.11:${scalapbVersion}"
+    implementation "com.thesamet.scalapb:scalapb-runtime-grpc_2.11:${scalapbVersion}"
+
+    implementation 'javax.annotation:javax.annotation-api:1.2'
+    implementation 'io.grpc:grpc-okhttp:1.26.0'
+    //implementation 'io.grpc:grpc-protobuf-lite:1.26.0'
+    implementation 'io.grpc:grpc-stub:1.26.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation "com.squareup.okhttp3:okhttp:4.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"
+    implementation 'com.android.support:multidex:1.0.3'
+
+}
+
+tasks.withType(ScalaCompile) {
+// If you want to use scala compile daemon
+    scalaCompileOptions.metaClass.useCompileDaemon = true
+// Suppress deprecation warnings
+    scalaCompileOptions.metaClass.deprecation = false
+// Additional parameters
+
+    scalaCompileOptions.metaClass.additionalParameters = ["-feature", "-Xexperimental", "-optimise"]
+    ScalaCompileOptions.metaClass.useAnt = false
+    scalaCompileOptions.metaClass.Xexperimental = true
+//	ScalaCompileOptions.metaClass.daemonServer = true
+//	ScalaCompileOptions.metaClass.fork = true
+
+//	ScalaCompileOptions.metaClass.useCompileDaemon = false
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.deprecation = false
+    scalaCompileOptions.additionalParameters = ["-feature", "-Xexperimental"]
+}
