@@ -9,6 +9,7 @@ message DeviceInfo {
     string os = 2;
     string app = 3;
     string app_version = 4;
+    string user_id = 5;
 }
 
 message SuggestBook {

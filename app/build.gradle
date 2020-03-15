@@ -99,6 +99,7 @@ tasks.withType(ScalaCompile) {
 	scalaCompileOptions.metaClass.additionalParameters = ["-feature", "-Xexperimental", "-optimise"]
 	ScalaCompileOptions.metaClass.useAnt = false
 	scalaCompileOptions.metaClass.Xexperimental = true
+
 //	ScalaCompileOptions.metaClass.daemonServer = true
 //	ScalaCompileOptions.metaClass.fork = true
 
@@ -109,3 +110,4 @@ tasks.withType(ScalaCompile) {
 	scalaCompileOptions.deprecation = false
 	scalaCompileOptions.additionalParameters = ["-feature", "-Xexperimental"]
 }
+
