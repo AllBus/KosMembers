@@ -1,11 +1,14 @@
 syntax = "proto3";
 
-//version 200314
+//version 200315
 
 package members.proto;
 
 message DeviceInfo {
     string name = 1;
+    string os = 2;
+    string app = 3;
+    string app_version = 4;
 }
 
 message SuggestBook {

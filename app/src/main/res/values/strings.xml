@@ -1,8 +1,12 @@
 <resources>
-	<string name="app_name">KosMembers</string>
-	<string name="nameEdit">Имя и фамилия (необязательно)</string>
-	<string name="bookEdit">Название документа</string>
-	<string name="sendBtn">Отправить предложение</string>
-	<string name="commentEdit">Комментарий</string>
-	<string name="suggestBookLabel">Предложите документ, который вы хотите видеть в программе</string>
+	<string name="sendSuggestion_app_name">KosMembers</string>
+	<string name="sendSuggestionNameEdit">Имя и фамилия</string>
+	<string name="sendSuggestionBookEdit">Название документа</string>
+	<string name="sendSuggestionSendBtn">Отправить предложение</string>
+	<string name="sendSuggestionCommentEdit">Комментарий</string>
+	<string name="sendSuggestionFormTitle">Предложите документ, который вы хотите видеть в программе</string>
+	<string name="sendSuggestionSuccess">"Ваше предложение принято"</string>
+	<string name="sendSuggestionFailure">"Произошла ошибка при отправке данных"</string>
+	<string name="sendSuggestionOptional">необязательно</string>
+	<string name="sendSuggestionBookHelper">Федеральный закон и т.п. (с номером и датой публикации")</string>
 </resources>
